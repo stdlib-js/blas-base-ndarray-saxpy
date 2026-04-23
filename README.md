@@ -41,38 +41,32 @@ limitations under the License.
 
 <!-- /.intro -->
 
+<section class="installation">
 
+## Installation
+
+```bash
+npm install @stdlib/blas-base-ndarray-saxpy
+```
+
+Alternatively,
+
+-   To load the package in a website via a `script` tag without installation and bundlers, use the [ES Module][es-module] available on the [`esm`][esm-url] branch (see [README][esm-readme]).
+-   If you are using Deno, visit the [`deno`][deno-url] branch (see [README][deno-readme] for usage intructions).
+-   For use in Observable, or in browser/node environments, use the [Universal Module Definition (UMD)][umd] build available on the [`umd`][umd-url] branch (see [README][umd-readme]).
+
+The [branches.md][branches-url] file summarizes the available branches and displays a diagram illustrating their relationships.
+
+To view installation and usage instructions specific to each branch build, be sure to explicitly navigate to the respective README files on each branch, as linked to above.
+
+</section>
 
 <section class="usage">
 
 ## Usage
 
-To use in Observable,
-
 ```javascript
-saxpy = require( 'https://cdn.jsdelivr.net/gh/stdlib-js/blas-base-ndarray-saxpy@umd/browser.js' )
-```
-
-To vendor stdlib functionality and avoid installing dependency trees for Node.js, you can use the UMD server build:
-
-```javascript
-var saxpy = require( 'path/to/vendor/umd/blas-base-ndarray-saxpy/index.js' )
-```
-
-To include the bundle in a webpage,
-
-```html
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/blas-base-ndarray-saxpy@umd/browser.js"></script>
-```
-
-If no recognized module system is present, access bundle contents via the global scope:
-
-```html
-<script type="text/javascript">
-(function () {
-    window.saxpy;
-})();
-</script>
+var saxpy = require( '@stdlib/blas-base-ndarray-saxpy' );
 ```
 
 #### saxpy( arrays )
@@ -80,27 +74,30 @@ If no recognized module system is present, access bundle contents via the global
 Multiplies a one-dimensional single-precision floating-point ndarray `x` by a constant `alpha` and adds the result to a one-dimensional single-precision floating-point ndarray `y`.
 
 ```javascript
-var Float32Array = require( '@stdlib/array-float32' );
-var scalar2ndarray = require( '@stdlib/ndarray-base-from-scalar' );
-var ndarray = require( '@stdlib/ndarray-base-ctor' );
+var Float32Vector = require( '@stdlib/ndarray-vector-float32' );
+var scalar2ndarray = require( '@stdlib/ndarray-from-scalar' );
 
-var xbuf = new Float32Array( [ 1.0, 2.0, 3.0, 4.0, 5.0 ] );
-var x = new ndarray( 'float32', xbuf, [ 5 ], [ 1 ], 0, 'row-major' );
+var x = new Float32Vector( [ 1.0, 2.0, 3.0, 4.0, 5.0 ] );
+var y = new Float32Vector( [ 1.0, 1.0, 1.0, 1.0, 1.0 ] );
 
-var ybuf = new Float32Array( [ 1.0, 1.0, 1.0, 1.0, 1.0 ] );
-var y = new ndarray( 'float32', ybuf, [ 5 ], [ 1 ], 0, 'row-major' );
+var alpha = scalar2ndarray( 5.0, {
+    'dtype': 'float32'
+});
 
-var alpha = scalar2ndarray( 5.0, 'float32', 'row-major' );
 var z = saxpy( [ x, y, alpha ] );
 // returns <ndarray>[ 6.0, 11.0, 16.0, 21.0, 26.0 ]
 
-var bool = ( y === z );
+var bool = ( z === y );
 // returns true
 ```
 
 The function has the following parameters:
 
--   **arrays**: array-like object containing an input ndarray, an output ndarray, and a zero-dimensional ndarray containing a scalar constant.
+-   **arrays**: array-like object containing the following ndarrays in order:
+
+    -   input ndarray
+    -   output ndarray
+    -   zero-dimensional ndarray containing a scalar constant
 
 </section>
 
@@ -118,38 +115,26 @@ The function has the following parameters:
 
 <!-- eslint no-undef: "error" -->
 
-```html
-<!DOCTYPE html>
-<html lang="en">
-<body>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/random-array-discrete-uniform@umd/browser.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/ndarray-from-scalar@umd/browser.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/ndarray-base-ctor@umd/browser.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/ndarray-to-array@umd/browser.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/blas-base-ndarray-saxpy@umd/browser.js"></script>
-<script type="text/javascript">
-(function () {
+```javascript
+var discreteUniform = require( '@stdlib/random-discrete-uniform' );
+var scalar2ndarray = require( '@stdlib/ndarray-from-scalar' );
+var ndarray2array = require( '@stdlib/ndarray-to-array' );
+var saxpy = require( '@stdlib/blas-base-ndarray-saxpy' );
 
 var opts = {
     'dtype': 'float32'
 };
 
-var xbuf = discreteUniform( 10, 0, 100, opts );
-var x = new ndarray( opts.dtype, xbuf, [ xbuf.length ], [ 1 ], 0, 'row-major' );
+var x = discreteUniform( [ 10 ], 0, 100, opts );
 console.log( ndarray2array( x ) );
 
-var ybuf = discreteUniform( xbuf.length, 0, 10, opts );
-var y = new ndarray( opts.dtype, ybuf, [ ybuf.length ], [ 1 ], 0, 'row-major' );
+var y = discreteUniform( [ 10 ], 0, 10, opts );
 console.log( ndarray2array( y ) );
 
 var alpha = scalar2ndarray( 5.0, opts );
+
 var out = saxpy( [ x, y, alpha ] );
 console.log( ndarray2array( out ) );
-
-})();
-</script>
-</body>
-</html>
 ```
 
 </section>
