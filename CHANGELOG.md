@@ -4,7 +4,7 @@
 
 <section class="release" id="unreleased">
 
-## Unreleased (2026-11-12)
+## Unreleased (2026-11-18)
 
 <section class="features">
 
@@ -22,6 +22,7 @@
 
 <details>
 
+-   [`9632366`](https://github.com/stdlib-js/stdlib/commit/9632366c1c13dd29dc05adbf95ddf087831267fc) - **docs:** use dedicated zero-dimensional tensor constructor in `blas/base/ndarray/saxpy` [(#16689)](https://github.com/stdlib-js/stdlib/pull/16689) _(by Kartik)_
 -   [`bdc1f9b`](https://github.com/stdlib-js/stdlib/commit/bdc1f9beed8120b36f6cb9fae9a5f28c091654f1) - **docs:** add notes _(by Athan Reines)_
 -   [`f5a9f7d`](https://github.com/stdlib-js/stdlib/commit/f5a9f7d31e7d8877e5e3556533382e8e7e02c58e) - **docs:** update descriptions _(by Athan Reines)_
 -   [`be5b88f`](https://github.com/stdlib-js/stdlib/commit/be5b88f6f8b66169d6a849762671816069e2a95c) - **docs:** update copy _(by Athan Reines)_
@@ -41,9 +42,10 @@
 
 ### Contributors
 
-A total of 3 people contributed to this release. Thank you to the following contributors:
+A total of 4 people contributed to this release. Thank you to the following contributors:
 
 -   Athan Reines
+-   Kartik
 -   Kaustubh Patange
 -   Philipp Burckhardt
 
